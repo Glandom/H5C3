@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户登录</title>
+    <link rel="stylesheet" href="./01.css" />
+    <script src="../js/jquery-3.6.1.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>登录</h1>
+      <form action="">
+        <input type="text" class="tbx" placeholder="账号" />
+        <input type="password" class="tbx" placeholder="密码" />
+        <input type="submit" class="sub" value="登录" />
+      </form>
+    </div>
+    <script>
+      window.onload = function () {
+        // 定义 con 接收 .container元素
+        const con = document.querySelector('.container')
+
+        //定义两个函数的开关
+        let inIn = true //鼠标点击去的门，默认打开
+        let isOut = false //鼠标出去的门，默认关闭
+
+        var span = null //给为未生的元素取名span
+
+        // 添加监听事件
+        // 监听鼠标进去的事件
+        con.addEventListener('mouseenter', (e) => {
+          // 如果进去的门为开
+          if (inIn) {
+            //获取进入的鼠标位置
+            // 生产成本元素的位置=进入点离窗口的距离-父盒子距离窗口的距离
+            let inX = e.clientX - e.target.offsetLeft
+            let inY = e.clientY - e.target.offsetTop
+
+            // 创建一个span元素，并给它对应的出生坐标
+            let el = document.createElement('span')
+            el.style.left = inX + 'px'
+            el.style.top = inY + 'px'
+
+            //添加到con对应得父元素，即container
+            con.appendChild(el)
+
+            $('.container span').removeClass('out') //移除出去的动画
+            $('.container span').addClass('in') //添加进入的动画
+
+            span = document.querySelector('.container span')
+            isIn = false //关闭进来的门(禁止使用进入的方法)
+            isOut = true //打开出去的门(可以使用出去的方法)
+          }
+        })
+
+        //监听鼠标离开的事件
+        con.addEventListener('mouseleave', (e) => {
+          if (isOut) {
+            //获取出去的鼠标位置
+            // 生产成本元素的位置=出去点离窗口的距离-父盒子距离窗口的距离
+            let outX = e.clientX - e.target.offsetLeft
+            let outY = e.clientY - e.target.offsetTop
+
+            $('.container span').removeClass('in') //移除进入的动画
+            $('.container span').addClass('out') //添加出去的动画
+
+            // 添加出去的坐标
+            $('.out').css('left', outX + 'px')
+            $('.out').css('top', outY + 'px')
+
+            // 关闭出去的门
+            isOut = false
+            // 设置定时器，当动画结束后再删除元素
+            setTimeout(() => {
+              con.removeChild(span) //移除span元素
+              isIn = true //将进入的门打开，以便下次进入做准备
+            }, 500)
+          }
+        })
+      }
+    </script>
+  </body>
+</html>
