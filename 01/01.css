@@ -12,6 +12,7 @@ body {
 }
 .container {
   display: flex;
+
   width: 350px;
   height: 450px;
   justify-content: center;
