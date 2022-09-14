@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  /* 弹性布局，让页面元素水平+垂直居中 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 设置body高度为100%窗口高度 */
+  height: 100vh;
+  /* 背景渐变色 */
+  background-image: linear-gradient(200deg, #6ef7ee, #e24dc7);
+  /* perspective设置视距 */
+  perspective: 200px;
+}
+.card {
+  position: relative;
+  width: 300px;
+  height: 450px;
+  /* 圆角 */
+  border-radius: 30px;
+  cursor: pointer;
+  background-color: #fff;
+  /* 添加盒子阴影 */
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.1);
+  /* 给父元素添加一个3D盒子属性，子元素就到背面了，这个属性是加到父元素，但是影响的是子元素 */
+  transform-style: preserve-3d;
+  /* 给卡片添加默认动画 */
+  animation: rotate-reverse 1.2s cubic-bezier(0.66, -0.47, 0.33, 1.5) forwards;
+}
+/* 设置鼠标移入卡片时执行动画 */
+.card:hover {
+  /* 动画名称 动画时长 第三个属性是贝塞尔曲线，可以自定义动画的运动轨迹。第四个是动画完成后的状态，一般是运动完回城后回到0%的状态，默认是backwards。当给的是forwards时，动画到100%就会停下 */
+  animation: rotate 1.2s cubic-bezier(0.66, -0.47, 0.33, 1.5) forwards;
+}
+.front,
+.back {
+  /* 子绝父相 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* 弹性布局 */
+  display: flex;
+  flex-direction: column;
+  /* 现在子元素垂直陈列，即子元素水平居中 */
+  align-items: center;
+  /* 平均分配高度给每一个子元素 */
+  justify-content: space-around;
+  font-size: 20px;
+  background-color: #fff;
+  border-radius: 30px;
+}
+.front {
+  /* 将第一个小盒子设置z-index: 1;就是在平面的前面一层，使第一个小盒子在上面，然后使用背面隐藏(backface-visibility: hidden;) 让第二个小盒子实现隐藏，最后将第二个小盒子设置transform: rotateY(180deg);，使其翻转180度，到后面再次翻转的时候字就会是正的啦 */
+  z-index: 1;
+  /* 背面隐藏 */
+  backface-visibility: hidden;
+  background-color: aliceblue;
+}
+.back {
+  /* 需要将盒子变为一个3D的盒子，这样旋转才有效果 */
+  transform: rotateY(180deg);
+}
+
+/* 旋转动画  正转*/
+@keyframes rotate {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(180deg);
+  }
+}
+/* 翻转 */
+@keyframes rotate-reverse {
+  0% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
