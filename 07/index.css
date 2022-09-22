@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  /* 百分百窗口 */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  /* 自定义属性 --s为太阳的颜色  --e为地球的颜色 --m为月亮的颜色*/
+  --s: #f39c12;
+  --e: #3498db;
+  --m: #b4d0ca;
+}
+/* sun */
+.sun {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  /* 通过var调用太阳的颜色 */
+  background-color: var(--s);
+  /* 发光效果 */
+  box-shadow: 0 0 10px var(--s), 0 0 20px var(--s), 0 0 30px var(--s),
+    0 0 40px var(--s);
+  /* 执行动画 */
+  animation: rotate 36.5s linear infinite;
+}
+/* 太阳的外环(地球轨道) */
+.sun::after {
+  content: '';
+  width: 330px;
+  height: 330px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #fff;
+  border-radius: 50%;
+  z-index: -1;
+}
+/* earth */
+.earth {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  left: 200px;
+  /* 通过var调用太阳的颜色 */
+  background-color: var(--e);
+  /* 发光效果 */
+  box-shadow: 0 0 10px var(--e), 0 0 20px var(--e), 0 0 30px var(--e),
+    0 0 40px var(--e);
+  /* 执行动画 */
+  animation: rotate 3s linear infinite;
+}
+/* 地球的外环(月球轨道) */
+.earth::after {
+  content: '';
+  width: 84px;
+  height: 84px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid gray;
+  border-radius: 50%;
+}
+/* moon */
+.moon {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  left: 50px;
+  /* 通过var调用太阳的颜色 */
+  background-color: var(--m);
+  /* 发光效果 */
+  box-shadow: 0 0 10px var(--m), 0 0 20px var(--m), 0 0 30px var(--m);
+}
+/* 动画 */
+@keyframes rotate {
+  to {
+    transform: rotateZ(360deg);
+  }
+}
