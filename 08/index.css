@@ -1,0 +1,48 @@
+body {
+  /* 定义图片的位置 */
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(200deg, #517fa4, #243949);
+}
+.btn-box a {
+  /* 定义图片的尺寸和颜色 */
+  position: relative;
+  display: inline-block;
+  font-size: 40px;
+  color: #88bef5;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  margin: 0 16px;
+  text-align: center;
+  transition: 0.3s linear;
+}
+.btn-box a::before,
+.btn-box a::after {
+  content: '';
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  transition: 0.3s linear;
+}
+.btn-box a:hover {
+  /* 缩小为原来的0.8倍 */
+  transform: scale(0.8);
+}
+.btn-box a:hover::before {
+  border-left: 4px solid;
+  border-right: 4px solid;
+  transform: skewX(20deg);
+}
+.btn-box a:hover::after {
+  border-top: 4px solid;
+  border-bottom: 4px solid;
+  transform: skewY(-20deg);
+}
