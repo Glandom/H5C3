@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>心形文字动画</title>
+    <link rel="stylesheet" href="./idnex.css" />
+    <!-- 引入vue -->
+    <script src="../vue/vue.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- :style="{'--d':(item*-1)*0.3} 给div添加自定义属性 -->
+      <div class="love" v-for="item in 67" :style="{'--d':(item*-1)*0.3}">
+        <div class="love-hor">
+          <div class="love-ver">
+            <div class="love-text">你好 新世界 {{item}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      new Vue({
+        el: '.container',
+      })
+    </script>
+  </body>
+</html>
