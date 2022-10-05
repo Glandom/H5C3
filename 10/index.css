@@ -1,0 +1,70 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 100vmin;
+  overflow: hidden;
+  background-color: #16162c;
+}
+div {
+  --h: 3030;
+  border: 3vmin double hsl(var(--h), 100%, 50%);
+  border-radius: 2.5vmin;
+  margin: 2.5vmin;
+  min-height: 2.5vmin;
+  max-width: 100vmin;
+  transform-style: preserve-3d;
+  --prefix-transform: scale(0.75);
+  animation: spinner 60000ms calc(var(--i)*-7200ms - 2000ms);
+  animation-play-state: paused;
+  background: radial-gradient(circle, hsl(var(--h) 100% 50% / 0), hsl(var(--h) 100% 50% / 0), hsl(var(--h) 100% 50% / 0.5));
+}
+div {
+  animation-delay: calc(var(--i)*1000ms);
+  animation-play-state: running;
+}
+@keyframes spinner {
+  0% {
+    transform: var(--prefix-transform) rotateZ(0.25turn) rotateY(0turn);
+  }
+  100% {
+    transform: var(--prefix-transform) rotateZ(0.25turn) rotateY(10turn);
+  }
+}
+div > div {
+  --h: 343;
+}
+div > div > div {
+  --h: 26;
+}
+div > div > div > div {
+  --h: 46;
+}
+div > div > div > div > div {
+  --h: 103;
+}
+div > div > div > div > div > div {
+  --h: 183;
+}
+div > div::before,
+div > div::after {
+  background: hsl(var(--h), 100%, 50%);
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 2.5vmin;
+  height: 0.5vmin;
+  top: 50%;
+  transform: translate(-5.5vmin, -50%);
+}
+div > div::after {
+  left: initial;
+  right: 0;
+  transform: translate(5.5vmin, -50%);
+}
